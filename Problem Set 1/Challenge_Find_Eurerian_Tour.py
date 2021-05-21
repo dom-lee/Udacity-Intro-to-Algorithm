@@ -1,8 +1,3 @@
-def make_unexplored_graph(graph, current_edge):
-    unexlpored = [edge for edge in graph if edge != current_edge]
-    return unexlpored
-
-
 def find_eulerian_tour(graph):
     unexplored = graph
     node = graph[0][0]
@@ -14,11 +9,11 @@ def find_eulerian_tour(graph):
         if not unexplored:
             return path
 
-        for edge in unexplored:
-            if node in edge:
-                node1 = edge[1] if node == edge[0] else edge[0]
+        for unexplored_edge in unexplored:
+            if node in unexplored_edge:
+                node1 = unexplored_edge[1] if node == unexplored_edge[0] else unexplored_edge[0]
                 path1 = path + [node1]
-                unexplored1 = make_unexplored_graph(unexplored, edge)
+                unexplored1 = [edge for edge in unexplored if edge != unexplored_edge]
                 open_set.append([path1, node1, unexplored1])
 
     return path
